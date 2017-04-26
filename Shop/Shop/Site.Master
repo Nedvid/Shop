@@ -74,18 +74,7 @@
                 </div>
             </div>
         </div>
-        <div id="TitleContent" style="text-align: center">
-            <a runat="server" href="~/">
-                <asp:Image  ID="Image1" runat="server" ImageUrl="~/Images/logo.jpg" BorderStyle="None" />
-            </a>  
-            <br />  
-        </div>
-        <div id="TitleContent" style="text-align: center">
-            <a runat="server" href="~/">
-                <asp:Image  ID="Image2" runat="server" ImageUrl="~/img/logo.jpg" BorderStyle="None" />
-            </a>  
-            <br />  
-        </div>
+
         <div id="Kategorie" style="text-align: center">       
             <asp:ListView ID="KategoriaList"  
                 ItemType="Shop.Models.Kategoria" 

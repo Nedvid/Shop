@@ -1,5 +1,6 @@
-﻿<%@ Page Title="Produkty" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" 
-         CodeBehind="Produkty.aspx.cs" Inherits="Shop.Produkty" %>
+﻿<%@ Page Title="Produkty" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="Produkt.aspx.cs" Inherits="Shop.Produkty" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <section>
         <div>
@@ -7,18 +8,18 @@
                 <h2><%: Page.Title %></h2>
             </hgroup>
 
-            <asp:ListView ID="Produkty" runat="server" 
+            <asp:ListView ID="Produkty" runat="server"
                 DataKeyNames="id_produkt" GroupItemCount="4"
                 ItemType="Shop.Models.Produkt" SelectMethod="GetProdukty">
                 <EmptyDataTemplate>
-                    <table >
+                    <table>
                         <tr>
                             <td>No data was returned.</td>
                         </tr>
                     </table>
                 </EmptyDataTemplate>
                 <EmptyItemTemplate>
-                    <td/>
+                    <td />
                 </EmptyItemTemplate>
                 <GroupTemplate>
                     <tr id="itemPlaceholderContainer" runat="server">
@@ -27,45 +28,64 @@
                 </GroupTemplate>
                 <ItemTemplate>
                     <td runat="server">
-                        <table>
-                            <tr>
-                                <td>
+                        <div class="campaign__offer-box">
+                            <div class="campaign__offer-row">
+                                <div class="campaign__offer-thumb">
                                     <a href="ProduktDetails.aspx?productID=<%#:Item.id_produkt%>">
-                                        <img src="/Images/<%#:Item.foto%>"
-                                            width="173" height="120" style="border: solid" /></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="ProduktDetails.aspx?productID=<%#:Item.id_produkt%>">
-                                        <span>
-                                            <%#:Item.nazwa_produkt%>
-                                        </span>
+                                        <img src="/Images/<%#:Item.foto%>">
+                                        width="173" height="120" style="border: solid" /></a>
                                     </a>
-                                    <br />
-                                    <span>
-                                        <b>Poprzednia Cena: </b><%#:String.Format("{0:c}", Item.poprzednia_cena)%>
-                                    </span>
-                                    <br />
-                                    <span>
-                                        <b>Cena: </b><%#:String.Format("{0:c}", Item.cena)%>
-                                    </span>
-                                    <br />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </table>
-                        </p>
+                                </div>
+                                <div class="campaign__offer-description">
+                                    <h3 class="campaign__offer-name">
+                                        <a href="ProduktDetails.aspx?productID=<%#:Item.id_produkt%>">
+                                            <span>
+                                                <%#:Item.nazwa_produkt%>
+                                            </span>
+                                        </a>
+                                    </h3>
+
+                                </div>
+                                <div class="campaign__offer-pricebox">
+                                    <div class="campaign__offer-pricetop">
+                                        <!-- Cena przekreślona i wielkość zniżki: START -->
+                                        <div class="campaign__offer-official-price">
+                                            <span class="campaign__offer-official-price--value">
+                                                <strike>
+                                                           <span class="price"><%#:String.Format("{0:c}", Item.poprzednia_cena)%><span class="super"></span></span>                                                        </strike>
+                                            </span>
+                                        </div>
+                                        <div class="campaign__offer-percent-price" data-first-price="59.99" data-second-price="39.9800">
+                                            <span class="campaign__offer-percent-price--value">-33%
+                                            </span>
+                                        </div>
+                                        <!-- Cena przekreślona i wielkość zniżki: END -->
+                                        <div style="clear: both;"></div>
+                                    </div>
+                                    <div class="campaign__offer-pricebottom">
+                                        <div class="campaign__offer-price-container">
+                                            <%#:String.Format("{0:c}", Item.cena)%>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="campaign__offer-buybox">
+                                        <span class="campaign__offer-buybox--button js-add-to-cart">
+                                            <span>KUP TERAZ</span>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        <tr />
                     </td>
                 </ItemTemplate>
                 <LayoutTemplate>
-                    <table style="width:100%;">
+                    <table style="width: 100%;">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table id="groupPlaceholderContainer" runat="server" style="width:100%">
+                                    <table id="groupPlaceholderContainer" runat="server" style="width: 100%">
                                         <tr id="groupPlaceholder"></tr>
                                     </table>
                                 </td>
@@ -81,3 +101,5 @@
         </div>
     </section>
 </asp:Content>
+
+
