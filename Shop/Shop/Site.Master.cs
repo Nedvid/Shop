@@ -7,6 +7,8 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using System.Linq;
+using Shop.Models;
 
 namespace Shop
 {
@@ -70,6 +72,13 @@ namespace Shop
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public IQueryable<Kategoria> GetKategorie()
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            IQueryable<Kategoria> query = _db.Kategorie;
+            return query;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

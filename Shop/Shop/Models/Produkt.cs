@@ -8,7 +8,7 @@ namespace Shop.Models
 {
     public class Produkt
     {
-        [ScaffoldColumn(false)]
+        [Key]
         public int id_produkt { get; set; }
 
         [Required, StringLength(100), Display(Name = "NazwaProdukt")]
@@ -23,6 +23,8 @@ namespace Shop.Models
 
         [Display(Name = "Poprzednia Cena")]
         public double? poprzednia_cena { get; set; }
+
+        public virtual ICollection<Egzemplarz> Egzemplarze { get; set; }
 
         //klucze obce
 

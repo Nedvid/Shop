@@ -8,7 +8,7 @@ namespace Shop.Models
 {
     public class Platforma
     {
-        [ScaffoldColumn(false)]
+        [Key]
         public int id_platforma { get; set; }
 
         [Required, StringLength(100), Display(Name = "Platforma")]

@@ -8,7 +8,7 @@ namespace Shop.Models
 {
     public class VAT
     {
-        [ScaffoldColumn(false)]
+        [Key]
         public int id_vat { get; set; }
 
         [Required, Display(Name = "VAT")]

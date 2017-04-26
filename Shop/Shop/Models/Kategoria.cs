@@ -8,7 +8,7 @@ namespace Shop.Models
 {
     public class Kategoria
     {
-        [ScaffoldColumn(false)]
+        [Key]
         public int id_kategoria { get; set; }
 
         [Required, StringLength(100), Display(Name = "Kategoria")]

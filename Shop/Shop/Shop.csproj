@@ -171,8 +171,6 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Contact.aspx" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -180,6 +178,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="ProduktDetails.aspx" />
+    <Content Include="Produkty.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -361,8 +361,28 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Egzemplarz.cs" />
+    <Compile Include="Models\EgzemplarzContext.cs" />
+    <Compile Include="Models\EgzemplarzDatabaseInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ProduktContext.cs" />
+    <Compile Include="Models\Kategoria.cs" />
+    <Compile Include="Models\Platforma.cs" />
+    <Compile Include="Models\Produkt.cs" />
+    <Compile Include="Models\VAT.cs" />
+    <Compile Include="ProduktDetails.aspx.cs">
+      <DependentUpon>ProduktDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProduktDetails.aspx.designer.cs">
+      <DependentUpon>ProduktDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Produkty.aspx.cs">
+      <DependentUpon>Produkty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Produkty.aspx.designer.cs">
+      <DependentUpon>Produkty.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -389,6 +409,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

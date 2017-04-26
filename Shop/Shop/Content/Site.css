@@ -1,5 +1,11 @@
 ﻿/* Move down content because we have a fixed navbar that is 50px tall */
 body {
+    background-color: #071525;
+    overflow: hidden;
+    background: -webkit-radial-gradient(bottom right, #340c71, #071525);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     padding-top: 50px;
     padding-bottom: 20px;
 }
