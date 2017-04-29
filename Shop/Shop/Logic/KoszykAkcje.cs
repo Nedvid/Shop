@@ -21,11 +21,11 @@ namespace Shop.Logic
             var Egz = _db.Egzemplarze.First(
                 c => c.id_produkt == id_prd
                 && c.czy_sprzedano == false);
-            
+
             var cartItem = _db.ElementyKoszyka.SingleOrDefault(
                 c => c.id_koszyk == ShoppingCartId
                 && c.id_produkt == id_prd
-                && c.id_egzemplarz==Egz.id_egzemplarz);
+                && c.id_egzemplarz == Egz.id_egzemplarz);
 
             if (cartItem == null)
             {
@@ -104,119 +104,130 @@ namespace Shop.Logic
         }
 
         public ShoppingCartActions GetCart(HttpContext context)
-    {
-      using (var cart = new ShoppingCartActions())
-      {
-        cart.ShoppingCartId = cart.GetCartId();
-        return cart;
-      }
-    }
-
-    public void UpdateShoppingCartDatabase(String cartId, ShoppingCartUpdates[] CartItemUpdates)
-    {
-      using (var db = new Shop.Models.EgzemplarzContext())
-      {
-        try
         {
-          int CartItemCount = CartItemUpdates.Count();
-          List<ElementKoszyka> myCart = GetCartItems();
-          foreach (var cartItem in myCart)
-          {
-            // Iterate through all rows within shopping cart list
-            for (int i = 0; i < CartItemCount; i++)
+            using (var cart = new ShoppingCartActions())
             {
-              if (cartItem.Produkt.id_produkt == CartItemUpdates[i].ProductId)
-              {
-                if (CartItemUpdates[i].PurchaseQuantity < 1 || CartItemUpdates[i].RemoveItem == true)
-                {
-                  RemoveItem(cartId, cartItem.id_produkt);
-                }
-                else
-                {
-                  UpdateItem(cartId, cartItem.id_produkt, CartItemUpdates[i].PurchaseQuantity);
-                }
-              }
+                cart.ShoppingCartId = cart.GetCartId();
+                return cart;
             }
-          }
         }
-        catch (Exception exp)
-        {
-          throw new Exception("ERROR: Unable to Update Cart Database - " + exp.Message.ToString(), exp);
-        }
-      }
-    }
 
-    public void RemoveItem(string removeCartID, int removeProductID)
-    {
-      using (var _db = new Shop.Models.EgzemplarzContext())
-      {
-        try
+        public void UpdateShoppingCartDatabase(String cartId, ShoppingCartUpdates[] CartItemUpdates)
         {
-          var myItem = (from c in _db.ElementyKoszyka where c.id_koszyk == removeCartID && c.Produkt.id_produkt == removeProductID select c).FirstOrDefault();
-          if (myItem != null)
-          {
-            // Remove Item.
-            _db.ElementyKoszyka.Remove(myItem);
+            using (var db = new Shop.Models.EgzemplarzContext())
+            {
+                try
+                {
+                    int CartItemCount = CartItemUpdates.Count();
+                    List<ElementKoszyka> myCart = GetCartItems();
+                    foreach (var cartItem in myCart)
+                    {
+                        // Iterate through all rows within shopping cart list
+                        for (int i = 0; i < CartItemCount; i++)
+                        {
+                            if (cartItem.Produkt.id_produkt == CartItemUpdates[i].ProductId)
+                            {
+                                if (CartItemUpdates[i].PurchaseQuantity < 1 || CartItemUpdates[i].RemoveItem == true)
+                                {
+                                    RemoveItem(cartId, cartItem.id_produkt);
+                                }
+                                else
+                                {
+                                    UpdateItem(cartId, cartItem.id_produkt, CartItemUpdates[i].PurchaseQuantity);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception exp)
+                {
+                    throw new Exception("ERROR: Unable to Update Cart Database - " + exp.Message.ToString(), exp);
+                }
+            }
+        }
+
+        public void RemoveItem(string removeCartID, int removeProductID)
+        {
+            using (var _db = new Shop.Models.EgzemplarzContext())
+            {
+                try
+                {
+                    var myItem = (from c in _db.ElementyKoszyka where c.id_koszyk == removeCartID && c.Produkt.id_produkt == removeProductID select c).FirstOrDefault();
+                    if (myItem != null)
+                    {
+                        // Remove Item.
+                        _db.ElementyKoszyka.Remove(myItem);
+                        _db.SaveChanges();
+                    }
+                }
+                catch (Exception exp)
+                {
+                    throw new Exception("ERROR: Unable to Remove Cart Item - " + exp.Message.ToString(), exp);
+                }
+            }
+        }
+
+        public void UpdateItem(string updateCartID, int updateProductID, int quantity)
+        {
+            using (var _db = new Shop.Models.EgzemplarzContext())
+            {
+                try
+                {
+                    var myItem = (from c in _db.ElementyKoszyka where c.id_koszyk == updateCartID && c.Produkt.id_produkt == updateProductID select c).FirstOrDefault();
+                    if (myItem != null)
+                    {
+                        myItem.ilosc = quantity;
+                        _db.SaveChanges();
+                    }
+                }
+                catch (Exception exp)
+                {
+                    throw new Exception("ERROR: Unable to Update Cart Item - " + exp.Message.ToString(), exp);
+                }
+            }
+        }
+
+        public void EmptyCart()
+        {
+            ShoppingCartId = GetCartId();
+            var cartItems = _db.ElementyKoszyka.Where(
+                c => c.id_koszyk == ShoppingCartId);
+            foreach (var cartItem in cartItems)
+            {
+                _db.ElementyKoszyka.Remove(cartItem);
+            }
+            // Save changes.             
             _db.SaveChanges();
-          }
         }
-        catch (Exception exp)
-        {
-          throw new Exception("ERROR: Unable to Remove Cart Item - " + exp.Message.ToString(), exp);
-        }
-      }
-    }
 
-    public void UpdateItem(string updateCartID, int updateProductID, int quantity)
-    {
-      using (var _db = new Shop.Models.EgzemplarzContext())
-      {
-        try
+        public int GetCount()
         {
-          var myItem = (from c in _db.ElementyKoszyka where c.id_koszyk == updateCartID && c.Produkt.id_produkt == updateProductID select c).FirstOrDefault();
-          if (myItem != null)
-          {
-            myItem.ilosc = quantity;
+            ShoppingCartId = GetCartId();
+
+            // Get the count of each item in the cart and sum them up          
+            int? count = (from cartItems in _db.ElementyKoszyka
+                          where cartItems.id_koszyk == ShoppingCartId
+                          select (int?)cartItems.ilosc).Sum();
+            // Return 0 if all entries are null         
+            return count ?? 0;
+        }
+
+        public struct ShoppingCartUpdates
+        {
+            public int ProductId;
+            public int PurchaseQuantity;
+            public bool RemoveItem;
+        }
+
+        public void MigrateCart(string cartId, string userName)
+        {
+            var shoppingCart = _db.ElementyKoszyka.Where(c => c.id_koszyk == cartId);
+            foreach (ElementKoszyka item in shoppingCart)
+            {
+                item.id_koszyk = userName;
+            }
+            HttpContext.Current.Session[CartSessionKey] = userName;
             _db.SaveChanges();
-          }
         }
-        catch (Exception exp)
-        {
-          throw new Exception("ERROR: Unable to Update Cart Item - " + exp.Message.ToString(), exp);
-        }
-      }
-    }
-
-    public void EmptyCart()
-    {
-      ShoppingCartId = GetCartId();
-      var cartItems = _db.ElementyKoszyka.Where(
-          c => c.id_koszyk == ShoppingCartId);
-      foreach (var cartItem in cartItems)
-      {
-        _db.ElementyKoszyka.Remove(cartItem);
-      }
-      // Save changes.             
-      _db.SaveChanges();
-    }
-
-    public int GetCount()
-    {
-      ShoppingCartId = GetCartId();
-
-      // Get the count of each item in the cart and sum them up          
-      int? count = (from cartItems in _db.ElementyKoszyka
-                    where cartItems.id_koszyk == ShoppingCartId
-                    select (int?)cartItems.ilosc).Sum();
-      // Return 0 if all entries are null         
-      return count ?? 0;
-    }
-
-    public struct ShoppingCartUpdates
-    {
-      public int ProductId;
-      public int PurchaseQuantity;
-      public bool RemoveItem;
-    }
     }
 }

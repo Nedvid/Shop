@@ -26,6 +26,11 @@ namespace Shop.Account
 
                 signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
                 IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                using (Shop.Logic.ShoppingCartActions usersShoppingCart = new Shop.Logic.ShoppingCartActions())
+                {
+                    String cartId = usersShoppingCart.GetCartId();
+                    usersShoppingCart.MigrateCart(cartId, user.Id);
+                }
             }
             else 
             {

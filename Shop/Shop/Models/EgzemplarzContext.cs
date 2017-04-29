@@ -18,5 +18,7 @@ namespace Shop.Models
         public DbSet<Kategoria> Kategorie { get; set; }
         public DbSet<Produkt> Produkty { get; set; }
         public DbSet<Egzemplarz> Egzemplarze { get; set; }
+        public DbSet<Zamowienie> Zamowienia { get; set; }
+        public DbSet<SzczegolyZamowienie> SzczegolyZamowienia { get; set; }
     }
 }
