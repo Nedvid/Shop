@@ -10,7 +10,7 @@
 
             <asp:ListView ID="Produkty" runat="server"
                 DataKeyNames="id_produkt" GroupItemCount="4"
-                ItemType="Shop.Models.Produkt" SelectMethod="GetProdukty">
+                ItemType="Shop.Models.Produkt" SelectMethod="GetAll">
                 <EmptyDataTemplate>
                     <table>
                         <tr>
@@ -44,7 +44,11 @@
                                             </span>
                                         </a>
                                     </h3>
-
+                                    <h4 class="campaign__offer-name"
+                                        <span>
+                                            Ilosc: <%#: Item.Ilosc %>
+                                        </span>
+                                    </h4>
                                 </div>
                                 <div class="campaign__offer-pricebox">
                                     <div class="campaign__offer-pricetop">
@@ -55,8 +59,9 @@
                                                            <span class="price"><%#:String.Format("{0:c}", Item.poprzednia_cena)%><span class="super"></span></span>                                                        </strike>
                                             </span>
                                         </div>
-                                        <div class="campaign__offer-percent-price" data-first-price="59.99" data-second-price="39.9800">
-                                            <span class="campaign__offer-percent-price--value">-33%
+                                        <div class="campaign__offer-percent-price">
+                                            <span class="campaign__offer-percent-price--value">
+                                                <%#:String.Format("{0:p}" , (1-(Item.cena/Item.poprzednia_cena)))%>
                                             </span>
                                         </div>
                                         <!-- Cena przekreślona i wielkość zniżki: END -->
@@ -71,9 +76,11 @@
                                     </div>
                                 </div>
                                 <div class="campaign__offer-buybox">
+                                        <a href="/DodajDoKoszyka.aspx?id_produkt=<%#:Item.id_produkt %>">
                                         <span class="campaign__offer-buybox--button js-add-to-cart">
                                             <span>KUP TERAZ</span>
                                         </span>
+                                        </a>
                                 </div>
                             </div>
                         </div>

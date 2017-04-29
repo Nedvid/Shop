@@ -8,6 +8,11 @@ namespace Shop.Models
 {
     public class Produkt
     {
+        public Produkt()
+        {
+            Ilosc = 0;
+        }
+
         [Key]
         public int id_produkt { get; set; }
 
@@ -23,6 +28,9 @@ namespace Shop.Models
 
         [Display(Name = "Poprzednia Cena")]
         public double? poprzednia_cena { get; set; }
+
+        [Display(Name = "Ilosc"),]
+        public int? Ilosc { get; set; }
 
         public virtual ICollection<Egzemplarz> Egzemplarze { get; set; }
 

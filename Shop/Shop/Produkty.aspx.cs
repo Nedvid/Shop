@@ -22,8 +22,16 @@ namespace Shop
             IQueryable<Produkt> query = _db.Produkty;
             if (id_kategoria.HasValue && id_kategoria > 0)
             {
-                query = query.Where(p => p.id_Kategoria == id_kategoria);
+                query = query.Where(p => p.id_Kategoria == id_kategoria && p.Ilosc>0);
             }
+            return query;
+        }
+
+        public IQueryable<Produkt> GetAll()
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            IQueryable<Produkt> query = _db.Produkty;
+            query = query.Where(p => p.Ilosc>0);
             return query;
         }
     }

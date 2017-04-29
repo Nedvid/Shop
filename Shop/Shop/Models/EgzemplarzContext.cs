@@ -12,6 +12,7 @@ namespace Shop.Models
         {
         }
 
+        public DbSet<ElementKoszyka> ElementyKoszyka { get; set; }
         public DbSet<VAT> VATy { get; set; }
         public DbSet<Platforma> Platformy { get; set; }
         public DbSet<Kategoria> Kategorie { get; set; }
