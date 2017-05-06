@@ -6925,14 +6925,21 @@ a.list-group-item-danger.active:focus {
 #MOJE
 
 campaign__offer-box{
-    border: 1px ;
-    border-style: solid;
+    margin-bottom: 5px;
+    position: relative;
 }
 
 .campaign__offer-row{margin-bottom:15px;border-bottom:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.5)}
 
-.campaign__offer-thumb{float:left;margin-right:30px;font-size:0}
+.campaign__offer-thumb {
+    float: left;
+    margin-right: 30px;
+    font-size: 0;
+}
 .campaign__offer-thumb a{display:inline-block;border:1px solid rgba(255,255,255,.25);border-bottom:0}
+.campaign__offer-thumb :hover{
+    image-resolution: 50%;
+}
 
 .campaign__offer-name{color:#fff;font-size:23px;margin-top:14px;width:100%;float:left;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-weight:400}
 
@@ -6944,13 +6951,14 @@ campaign__offer-box{
 .campaign__offer-pricebottom
 .campaign__offer-price-container{float:left;color:#fff;font-size:29px;font-weight:700;margin-right:6px}
 
-.campaign__offer-description{float:left;width:390px;margin-right:35px}
-.campaign__offer-pricebox{float:left;margin-top:20px}
-.campaign__offer-buybox{float:right;margin-right:20px;margin-top:27px;position:relative}
+.campaign__offer-description{float:left;width:280px;margin-right:30px}
+.campaign__offer-pricebox{float:left;margin-top:30px}
+.campaign__offer-buybox{float:right;margin-right:30px;margin-top:40px;position:relative}
 .campaign__offer-buybox:hover
 
-.campaign__offer-buybox--button{background:#00ffc8}
-.campaign__offer-buybox--button{display:block;padding:8px 19px 7px 16px;cursor:pointer;font-size:17px;font-weight:700;text-transform:uppercase;color:#fff;-webkit-transition:all .18s ease-in 0s;transition:all .18s ease-in 0s;border:1px solid #00ffc8;background:transparent}
+.campaign__offer-buybox--button{background:#00ffc8 }
+
+.campaign__offer-buybox--button{display:block;padding:8px 19px 7px 16px;cursor:pointer;font-size:17px;font-weight:700;text-transform:uppercase;color:#fff;-webkit-transition:all .18s ease-in 0s;transition:all .18s ease-in 0s;border:2px solid #00ffc8; border-radius: 5px; background:transparent}
 .campaign__offer-buybox--button.campaign__button-hover-animation{background:#00ffc8}
 .campaign__offer-buybox--button i{margin-right:8px}
 .campaign__offer-buybox--button>span{position:relative;}
@@ -6958,4 +6966,29 @@ campaign__offer-box{
 .campaign__offer-buybox--button>span:after{content:"\f110";font-weight:lighter;opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}
 .campaign__offer-buybox--button--clicked>span:before{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
 .campaign__offer-buybox--button--clicked>span:after{opacity:1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"}
+
+a {     
+text-decoration: none; 
+} 
 .clear { clear: both; }
+
+table {
+   background: rgba(0,0,0,0)
+}
+
+tr{
+    
+    background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,10,0,1));
+}
+
+.header {
+    top: 0;
+    height: 400px;
+    background-image: url("https://assets.vg247.com/current//2016/11/mass_effect_andromeda_wide_art_2.jpg");
+    width: 100%;
+    margin-bottom: 50px;
+    background-size: 100%;
+    background-attachment: fixed;
+	text-align: center;
+    z-index: 1px;
+}

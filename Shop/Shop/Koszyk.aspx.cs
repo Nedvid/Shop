@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using System.Collections;
 using System.Web.ModelBinding;
 
+
 namespace Shop
 {
     public partial class Koszyk : System.Web.UI.Page
@@ -31,7 +32,7 @@ namespace Shop
                     lblTotal.Text = "";
                     ShoppingCartTitle.InnerText = "Shopping Cart is Empty";
                     UpdateBtn.Visible = false;
-                    CheckoutImageBtn.Visible = false;
+
                 }
             }
         }
@@ -53,7 +54,7 @@ namespace Shop
                 {
                     IOrderedDictionary rowValues = new OrderedDictionary();
                     rowValues = GetValues(CartList.Rows[i]);
-                    cartUpdates[i].ProductId = Convert.ToInt32(rowValues["ProductID"]);
+                    cartUpdates[i].ProductId = Convert.ToInt32(rowValues["id_produkt"]);
 
                     CheckBox cbRemove = new CheckBox();
                     cbRemove = (CheckBox)CartList.Rows[i].FindControl("Remove");
@@ -87,15 +88,6 @@ namespace Shop
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
             UpdateCartItems();
-        }
-
-        protected void CheckoutBtn_Click(object sender, ImageClickEventArgs e)
-        {
-            using (ShoppingCartActions usersShoppingCart = new ShoppingCartActions())
-            {
-                Session["payment_amt"] = usersShoppingCart.GetTotal();
-            }
-            Response.Redirect("Checkout/CheckoutStart.aspx");
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Data.Entity;
 using Shop.Models;
+using Shop.Logic;
 
 namespace Shop
 {
@@ -21,6 +22,10 @@ namespace Shop
 
             // Initialize the product database.
             Database.SetInitializer(new EgzemplarzDatabaseInitializer());
+
+            // Create the custom role and user.
+            //RoleActions roleActions = new RoleActions();
+            //roleActions.AddUserAndRole();
         }
     }
 }

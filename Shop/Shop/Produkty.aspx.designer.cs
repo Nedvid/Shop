@@ -13,6 +13,15 @@ namespace Shop {
     public partial class Produkty {
         
         /// <summary>
+        /// KategoriaList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView KategoriaList;
+        
+        /// <summary>
         /// Produkty control.
         /// </summary>
         /// <remarks>

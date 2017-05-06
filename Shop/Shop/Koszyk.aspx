@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Koszyk.aspx.cs" Inherits="Shop.Koszyk" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+        <div class="container body-content">
     <div id="ShoppingCartTitle" runat="server" class="ContentHead">
         <h1>Koszyk</h1>
     </div>
@@ -13,7 +14,7 @@
             <asp:BoundField DataField="Produkt.cena" HeaderText="Price (each)" DataFormatString="{0:c}" />
             <asp:TemplateField HeaderText="Quantity">
                 <ItemTemplate>
-                    <asp:TextBox ID="PurchaseQuantity" Width="40" runat="server" Text="<%#: Item.ilosc %>"></asp:TextBox>
+                    <asp:TextBox CssClass="text-muted" ID="PurchaseQuantity" Width="40" runat="server" Text="<%#: Item.ilosc %>"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Item Total">
@@ -39,14 +40,10 @@
      <table> 
     <tr>
       <td>
-        <asp:Button ID="UpdateBtn" runat="server" Text="Update" OnClick="UpdateBtn_Click" />
+        <asp:Button CssClass="btn btn-success" ID="UpdateBtn" runat="server" Text="Update" OnClick="UpdateBtn_Click" />
       </td>
       <td>
-          <asp:ImageButton ID="CheckoutImageBtn" runat="server" 
-                      ImageUrl="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" 
-                      Width="145" AlternateText="Check out with PayPal" 
-                      OnClick="CheckoutBtn_Click" 
-                      BackColor="Transparent" BorderWidth="0" />
+        <!--Checkout Placeholder -->
       </td>
     </tr>
     </table>

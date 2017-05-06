@@ -34,5 +34,19 @@ namespace Shop
             query = query.Where(p => p.Ilosc>0);
             return query;
         }
+
+        public IQueryable<Kategoria> GetKategorie()
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            IQueryable<Kategoria> query = _db.Kategorie;
+            return query;
+        }
+
+        public IQueryable<Platforma> GetPlatformy()
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            IQueryable<Platforma> query = _db.Platformy;
+            return query;
+        }
     }
 }

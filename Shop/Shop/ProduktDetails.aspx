@@ -2,6 +2,7 @@
          CodeBehind="ProduktDetails.aspx.cs" Inherits="Shop.ProduktDetails" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:FormView ID="Szczegoly" runat="server" ItemType="Shop.Models.Produkt" SelectMethod ="GetProdukty" RenderOuterTable="false">
+            <div class="container body-content">
         <ItemTemplate>
             <div>
                 <h1><%#:Item.nazwa_produkt %></h1>
@@ -24,5 +25,6 @@
                 </tr>
             </table>
         </ItemTemplate>
+                </div>
     </asp:FormView>
 </asp:Content>
