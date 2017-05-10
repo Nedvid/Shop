@@ -16,13 +16,13 @@ namespace Shop
 
         }
 
-        public IQueryable<Produkt> GetProdukty([QueryString("id")] int? id_kategoria)
+        public IQueryable<Produkt> GetProdukty([QueryString("id")] int? categoryId)
         {
             var _db = new Shop.Models.EgzemplarzContext();
             IQueryable<Produkt> query = _db.Produkty;
-            if (id_kategoria.HasValue && id_kategoria > 0)
+            if (categoryId.HasValue && categoryId > 0)
             {
-                query = query.Where(p => p.id_Kategoria == id_kategoria && p.Ilosc>0);
+                query = query.Where(p => p.id_Kategoria == categoryId);
             }
             return query;
         }

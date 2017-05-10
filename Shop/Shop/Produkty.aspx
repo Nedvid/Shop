@@ -44,26 +44,21 @@
                               <div class="form-group">
                                  <div class="checkbox">
                                     <label>
-                                    <input type="checkbox">Armani (10)
-                                    </label>
-                                 </div>
-                                 <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox">Versace (12)
-                                    </label>
-                                 </div>
-                                 <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox">Carlo Bruni (15)
-                                    </label>
-                                 </div>
-                                 <div class="checkbox">
-                                    <label>
-                                    <input type="checkbox">Jack Honey (14)
+                                        <asp:ListView ID="ListView1"  
+                                        ItemType="Shop.Models.Platforma" 
+                                        runat="server"
+                                        SelectMethod="GetPlatformy" >
+                                        <ItemTemplate>
+
+                                        <input type="checkbox"><%#: Item.nazwa_platforma %></br>
+
+                                                </ItemTemplate>
+                                        <ItemSeparatorTemplate>  </br>  </ItemSeparatorTemplate>
+                                        </asp:ListView>
                                     </label>
                                  </div>
                               </div>
-                              <button class="btn btn-default btn-sm btn-template-main"><i class="fa fa-pencil"></i>Apply</button>
+                              <button class="btn btn-default btn-sm btn-template-main"><i class="fa fa-pencil"></i>Zastosuj</button>
                            </form>
                         </div>
                      </div>
@@ -77,25 +72,25 @@
                                  <div class="checkbox">
                                     <label>
                                     <input type="checkbox">
-                                    <span class="colour white"></span>White (14)
+                                    <span class="colour white"></span>> 50zł
                                     </label>
                                  </div>
                                  <div class="checkbox">
                                     <label>
                                     <input type="checkbox">
-                                    <span class="colour blue"></span>Blue (10)
+                                    <span class="colour blue"></span>> 100zł (10)
                                     </label>
                                  </div>
                                  <div class="checkbox">
                                     <label>
                                     <input type="checkbox">
-                                    <span class="colour green"></span>Green (20)
+                                    <span class="colour green"></span>> 150zł (20)
                                     </label>
                                  </div>
                                  <div class="checkbox">
                                     <label>
                                     <input type="checkbox">
-                                    <span class="colour yellow"></span>Yellow (13)
+                                    <span class="colour yellow"></span>> 200zł (13)
                                     </label>
                                  </div>
                                  <div class="checkbox">
@@ -105,7 +100,7 @@
                                     </label>
                                  </div>
                               </div>
-                              <button class="btn btn-default btn-sm btn-template-main"><i class="fa fa-pencil"></i>Apply</button>
+                              <button class="btn btn-default btn-sm btn-template-main"><i class="fa fa-pencil"></i>Zastosuj</button>
                            </form>
                         </div>
                      </div>

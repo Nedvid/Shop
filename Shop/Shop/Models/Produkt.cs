@@ -24,10 +24,10 @@ namespace Shop.Models
 
         public string foto { get; set; }
         [Required, Display(Name = "Cena")]
-        public double? cena { get; set; }
+        public double cena { get; set; }
 
         [Display(Name = "Poprzednia Cena")]
-        public double? poprzednia_cena { get; set; }
+        public double poprzednia_cena { get; set; }
 
         [Display(Name = "Ilosc"),]
         public int? Ilosc { get; set; }

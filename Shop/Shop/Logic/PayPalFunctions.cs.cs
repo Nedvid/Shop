@@ -33,9 +33,9 @@ public class NVPAPICaller
     //Replace <Your API Username> with your API Username
     //Replace <Your API Password> with your API Password
     //Replace <Your Signature> with your Signature
-    public string APIUsername = "pawel.soja95_api1.gmail.com";
-    private string APIPassword = "LTFMNB4U4ATFRNGE";
-    private string APISignature = "AiPC9BjkCyDFQXbSkoZcgqH3hpacA.kcYZFerdNLZxyo9SlvYB7qKKHw";
+    public string APIUsername = "nedved117_api1.gmail.com";
+    private string APIPassword = "PSEWERFG2GZELQT9";
+    private string APISignature = "AFcWxV21C7fd0v3bYYYRCpSSRl31AqQNbR1xSnM-JOLFBNkagCG33FLW";
     private string Subject = "";
     private string BNCode = "PP-ECWizard";
 
@@ -65,7 +65,7 @@ public class NVPAPICaller
         encoder["METHOD"] = "SetExpressCheckout";
         encoder["RETURNURL"] = returnURL;
         encoder["CANCELURL"] = cancelURL;
-        encoder["BRANDNAME"] = "Wingtip Toys Sample Application";
+        encoder["BRANDNAME"] = "Shop";
         encoder["PAYMENTREQUEST_0_AMT"] = amt;
         encoder["PAYMENTREQUEST_0_ITEMAMT"] = amt;
         encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
@@ -79,7 +79,8 @@ public class NVPAPICaller
             for (int i = 0; i < myOrderList.Count; i++)
             {
                 encoder["L_PAYMENTREQUEST_0_NAME" + i] = myOrderList[i].Produkt.nazwa_produkt.ToString();
-                encoder["L_PAYMENTREQUEST_0_AMT" + i] = myOrderList[i].Produkt.cena.ToString();
+                //encoder["L_PAYMENTREQUEST_0_AMT" + i] = myOrderList[i].Produkt.cena.ToString();
+                encoder["L_PAYMENTREQUEST_0_AMT" + i] = Math.Round(myOrderList[i].Produkt.cena, 2).ToString();
                 encoder["L_PAYMENTREQUEST_0_QTY" + i] = myOrderList[i].ilosc.ToString();
             }
         }
@@ -182,12 +183,12 @@ public class NVPAPICaller
 
         string strPost = NvpRequest + "&" + buildCredentialsNVPString();
         strPost = strPost + "&BUTTONSOURCE=" + HttpUtility.UrlEncode(BNCode);
-        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
+        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         // Try using Tls11 if it doesnt works for you with Tls
         HttpWebRequest objRequest = (HttpWebRequest)WebRequest.Create(url);
         objRequest.Timeout = Timeout;
         objRequest.Method = WebRequestMethods.Http.Post;
- 
+        objRequest.ContentLength = strPost.Length;
         try
         {
 
