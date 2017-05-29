@@ -6936,9 +6936,11 @@ campaign__offer-box{
     margin-right: 30px;
     font-size: 0;
 }
-.campaign__offer-thumb a{display:inline-block;border:1px solid rgba(255,255,255,.25);border-bottom:0}
+.campaign__offer-thumb a{display:inline-block;border:1px solid rgba(255,255,255,.25);}
 .campaign__offer-thumb :hover{
-    image-resolution: 50%;
+    background-color: greenyellow;
+    opacity : 0.90;
+    filter : alpha(opacity=70);
 }
 
 .campaign__offer-name{color:#fff;font-size:23px;margin-top:14px;width:100%;float:left;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-weight:400}
@@ -6946,7 +6948,7 @@ campaign__offer-box{
 .campaign__offer-pricetop .campaign__offer-official-price{float:left;margin-right:3px;margin-top:3px}
 .campaign__offer-pricetop .campaign__offer-official-price--value{color:#808285;font-size:14px}
 .campaign__offer-pricetop .campaign__offer-percent-price{float:left}
-.campaign__offer-pricetop .campaign__offer-percent-price--value{color:#00ffc8;font-size:18px;font-weight:700}
+.campaign__offer-pricetop .campaign__offer-percent-price--value{color:#77b300;font-size:18px;font-weight:700}
 .campaign__offer-pricebottom{position:relative;top:-7px}
 .campaign__offer-pricebottom
 .campaign__offer-price-container{float:left;color:#fff;font-size:29px;font-weight:700;margin-right:6px}
@@ -6956,10 +6958,10 @@ campaign__offer-box{
 .campaign__offer-buybox{float:right;margin-right:30px;margin-top:40px;position:relative}
 .campaign__offer-buybox:hover
 
-.campaign__offer-buybox--button{background:#00ffc8 }
+.campaign__offer-buybox--button{background:#77b300 }
 
-.campaign__offer-buybox--button{display:block;padding:8px 19px 7px 16px;cursor:pointer;font-size:17px;font-weight:700;text-transform:uppercase;color:#fff;-webkit-transition:all .18s ease-in 0s;transition:all .18s ease-in 0s;border:2px solid #00ffc8; border-radius: 5px; background:transparent}
-.campaign__offer-buybox--button.campaign__button-hover-animation{background:#00ffc8}
+.campaign__offer-buybox--button{display:block;padding:8px 19px 7px 16px;cursor:pointer;font-size:17px;font-weight:700;text-transform:uppercase;color:#fff;-webkit-transition:all .18s ease-in 0s;transition:all .18s ease-in 0s;border:2px solid #77b300; border-radius: 5px; background:transparent}
+.campaign__offer-buybox--button.campaign__button-hover-animation{background:#77b300}
 .campaign__offer-buybox--button i{margin-right:8px}
 .campaign__offer-buybox--button>span{position:relative;}
 .campaign__offer-buybox--button>span:after{position:absolute;top:0;left:0;font-family:FontAwesome;-webkit-transition:all .18s ease-in 0s;transition:all .18s ease-in 0s}
@@ -6967,28 +6969,58 @@ campaign__offer-box{
 .campaign__offer-buybox--button--clicked>span:before{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
 .campaign__offer-buybox--button--clicked>span:after{opacity:1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"}
 
-a {     
-text-decoration: none; 
-} 
-.clear { clear: both; }
-
-table {
-   background: rgba(0,0,0,0)
-}
-
-tr{
-    
-    background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,10,0,1));
-}
 
 .header {
     top: 0;
     height: 400px;
     background-image: url("https://assets.vg247.com/current//2016/11/mass_effect_andromeda_wide_art_2.jpg");
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    margin-left: 10px;
     background-size: 100%;
     background-attachment: fixed;
 	text-align: center;
     z-index: 1px;
 }
+
+li.active-category{
+    height: 40px;
+
+}
+
+li.active-category a:hover{
+    background-color: #77b300;
+    border-style: solid;
+    border-radius: 5px;
+    border: 1px;
+    height: 40px;
+}
+
+.produkt{
+    height: 123px;
+    margin-bottom: 25px;
+    margin-top: 0px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.produkt a:link{
+    color:white;
+}
+
+.produkt a:visited{
+    color:white;
+}
+
+.produkt a:active{
+    color: #77b300;
+}
+
+.produkt a:hover{
+    color: #77b300;
+    text-decoration: none;
+}
+
+
+

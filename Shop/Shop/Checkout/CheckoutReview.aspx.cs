@@ -5,22 +5,23 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Shop.Models;
+using System.Web.SessionState;
 
 namespace Shop.Checkout
 {
     public partial class CheckoutReview : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e) 
         {
             if (!IsPostBack)
             {
                 NVPAPICaller payPalCaller = new NVPAPICaller();
-
                 string retMsg = "";
                 string token = "";
                 string PayerID = "";
                 NVPCodec decoder = new NVPCodec();
                 token = Session["token"].ToString();
+
 
                 bool ret = payPalCaller.GetCheckoutDetails(token, ref PayerID, ref decoder, ref retMsg);
                 if (ret)

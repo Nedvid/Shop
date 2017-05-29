@@ -58,8 +58,8 @@ public class NVPAPICaller
             host = host_SB;
         }
 
-        string returnURL = "https://localhost:44300/Checkout/CheckoutReview.aspx";
-        string cancelURL = "https://localhost:44300/Checkout/CheckoutCancel.aspx";
+        string returnURL = "https://localhost:44317/Checkout/CheckoutReview.aspx";
+        string cancelURL = "https://localhost:44317/Checkout/CheckoutCancel.aspx";
 
         NVPCodec encoder = new NVPCodec();
         encoder["METHOD"] = "SetExpressCheckout";
@@ -69,7 +69,7 @@ public class NVPAPICaller
         encoder["PAYMENTREQUEST_0_AMT"] = amt;
         encoder["PAYMENTREQUEST_0_ITEMAMT"] = amt;
         encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
-        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "USD";
+        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "PLN";
 
         // Get the Shopping Cart Products
         using (Shop.Logic.ShoppingCartActions myCartOrders = new Shop.Logic.ShoppingCartActions())
@@ -79,8 +79,9 @@ public class NVPAPICaller
             for (int i = 0; i < myOrderList.Count; i++)
             {
                 encoder["L_PAYMENTREQUEST_0_NAME" + i] = myOrderList[i].Produkt.nazwa_produkt.ToString();
-                //encoder["L_PAYMENTREQUEST_0_AMT" + i] = myOrderList[i].Produkt.cena.ToString();
-                encoder["L_PAYMENTREQUEST_0_AMT" + i] = Math.Round(myOrderList[i].Produkt.cena, 2).ToString();
+               // string tmp = Math.Round(myOrderList[i].Produkt.cena, 2).ToString();
+               // encoder["L_PAYMENTREQUEST_0_AMT" + i] = Math.Round(myOrderList[i].Produkt.cena, 2).ToString();
+                encoder["L_PAYMENTREQUEST_0_AMT" + i] = "22.50";
                 encoder["L_PAYMENTREQUEST_0_QTY" + i] = myOrderList[i].ilosc.ToString();
             }
         }
@@ -183,7 +184,9 @@ public class NVPAPICaller
 
         string strPost = NvpRequest + "&" + buildCredentialsNVPString();
         strPost = strPost + "&BUTTONSOURCE=" + HttpUtility.UrlEncode(BNCode);
-        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        System.Net.ServicePointManager.Expect100Continue = true;
+        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+        System.Net.ServicePointManager.DefaultConnectionLimit = 9999;
         // Try using Tls11 if it doesnt works for you with Tls
         HttpWebRequest objRequest = (HttpWebRequest)WebRequest.Create(url);
         objRequest.Timeout = Timeout;

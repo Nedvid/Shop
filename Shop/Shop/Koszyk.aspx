@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Koszyk.aspx.cs" Inherits="Shop.Koszyk" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-        <div class="container body-content">
+
     <div id="ShoppingCartTitle" runat="server" class="ContentHead">
         <h1>Koszyk</h1>
     </div>

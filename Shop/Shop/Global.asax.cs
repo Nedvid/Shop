@@ -23,9 +23,8 @@ namespace Shop
             // Initialize the product database.
             Database.SetInitializer(new EgzemplarzDatabaseInitializer());
 
-            // Create the custom role and user.
-            //RoleActions roleActions = new RoleActions();
-            //roleActions.AddUserAndRole();
+            RoleActions roleActions = new RoleActions();
+            roleActions.AddUserAndRole();
         }
     }
 }

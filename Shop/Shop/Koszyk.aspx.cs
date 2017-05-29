@@ -97,7 +97,7 @@ namespace Shop
             {
                 Session["payment_amt"] = usersShoppingCart.GetTotal();
             }
-            Response.Redirect("Checkout/CheckoutReview.aspx");
+            Response.Redirect("Checkout/CheckoutStart.aspx");
         }
     }
 }

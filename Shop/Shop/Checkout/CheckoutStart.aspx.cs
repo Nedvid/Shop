@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Shop.Models;
+using System.Web.SessionState;
 
 namespace Shop.Checkout
 {
-    public partial class CheckoutStart : System.Web.UI.Page
+	public partial class CheckoutStart : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,8 +19,7 @@ namespace Shop.Checkout
 
             if (Session["payment_amt"] != null)
             {
-                //string amt = Session["payment_amt"].ToString();
-                string amt = Math.Round(System.Convert.ToDecimal(Session["payment_amt"]), 2).ToString();
+                string amt = Session["payment_amt"].ToString();
 
                 bool ret = payPalCaller.ShortcutExpressCheckout(amt, ref token, ref retMsg);
                 if (ret)

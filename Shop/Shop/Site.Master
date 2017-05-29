@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - KeyShop</title>
-
+    <link rel="stylesheet" href="/Content/font-awesome.min.css">
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/bootsrap") %>
     </asp:PlaceHolder>
@@ -50,24 +50,25 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Strona Główna</a></li>
-                        <li><a runat="server" href="~/About">O nas</a></li>
-                        <li><a runat="server" href="~/Contact">Kontakt</a></li>
-                        <li><a runat="server" href="~/Produkty">Sklep</a></li>
+                        <li> <a runat="server" id="adminLink" visible="false" href="~/Admin/AdminPage"><i class="fa fa-lock" aria-hidden="true" style="margin-right: 5px;"></i> Admin</a></li>
+                        <li><a runat="server" href="~/"><i class="fa fa-home" aria-hidden="true"style="margin-right: 5px;"></i> Strona Główna</a></li>
+                        <!--<li><a runat="server" href="~/About"><i class="fa fa-users" aria-hidden="true" style="margin-right: 5px;"></i>O nas</a></li>-->
+                        <li><a runat="server" href="~/Contact"><i class="fa fa-info" aria-hidden="true" style="margin-right: 5px;"></i> Kontakt</a></li>
+                        <li><a runat="server" href="~/Produkty"><i class="fa fa-shopping-bag" aria-hidden="true" style="margin-right: 5px;"></i> Sklep</a></li>
                         <li><a runat="server" href="~/Koszyk" ID="cartCount">&nbsp;</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register">Zarejestruj</a></li>
-                                <li><a runat="server" href="~/Account/Login">Zaloguj</a></li>
+                                <li><a runat="server" href="~/Account/Register"><i class="fa fa-user-plus" aria-hidden="true" style="margin-right: 5px;"></i> Zarejestruj</a></li>
+                                <li><a runat="server" href="~/Account/Login"><i class="fa fa-sign-in" aria-hidden="true" style="margin-right: 5px;"></i> Zaloguj</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
                                 <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Wyloguj" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>
                         </LoggedInTemplate>
@@ -76,33 +77,14 @@
             </div>
         </div>
         
-        <%--Kategorie--%>
-        <%-- 
-        <div id="Kategorie" style="text-align: center">       
-            <asp:ListView ID="KategoriaList"  
-                ItemType="Shop.Models.Kategoria" 
-                runat="server"
-                SelectMethod="GetKategorie" >
-                <ItemTemplate>
-                    <b style="font-size: large; font-style: normal">
-                        <a href="/Produkty.aspx?id=<%#: Item.id_kategoria %>">
-                        <%#: Item.nazwa_kategoria %>
-                        </a>
-                    </b>
-                </ItemTemplate>
-                <ItemSeparatorTemplate>  |  </ItemSeparatorTemplate>
-            </asp:ListView>
-        </div>
-         %>
-        <%--Kategorie--%>
-
+        <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - KeyShop</p>
             </footer>
-
+        </div>
     </form>
 </body>
 </html>

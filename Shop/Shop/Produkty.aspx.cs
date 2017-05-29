@@ -27,6 +27,17 @@ namespace Shop
             return query;
         }
 
+        public IQueryable<Produkt> GetProdukty2([QueryString("id")] int? platformaId)
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            IQueryable<Produkt> query = _db.Produkty;
+            if (platformaId.HasValue && platformaId> 0)
+            {
+                query = query.Where(p => p.id_Platforma == platformaId);
+            }
+            return query;
+        }
+
         public IQueryable<Produkt> GetAll()
         {
             var _db = new Shop.Models.EgzemplarzContext();

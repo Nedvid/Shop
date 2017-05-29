@@ -77,7 +77,7 @@ namespace Shop.Checkout
 
         protected void Continue_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Default.aspx");
+            Response.Redirect("~/Produkty.aspx");
         }
     }
 }

@@ -170,6 +170,8 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Admin\AdminPage.aspx" />
+    <Content Include="Admin\AdminPage_Details.aspx" />
     <Content Include="Checkout\CheckoutCancel.aspx" />
     <Content Include="Checkout\CheckoutError.aspx" />
     <Content Include="Checkout\CheckoutReview.aspx" />
@@ -180,6 +182,9 @@
     <Content Include="Content\bootstrap-original.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="DodajDoKoszyka.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -188,6 +193,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="Checkout\Web.config" />
+    <Content Include="Admin\Web.config" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Koszyk.aspx" />
     <Content Include="ProduktDetails.aspx" />
@@ -345,6 +356,20 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AdminPage.aspx.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminPage.aspx.designer.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminPage_Details.aspx.cs">
+      <DependentUpon>AdminPage_Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminPage_Details.aspx.designer.cs">
+      <DependentUpon>AdminPage_Details.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -422,8 +447,10 @@
     <Compile Include="Koszyk.aspx.designer.cs">
       <DependentUpon>Koszyk.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logic\AddProducts.cs" />
     <Compile Include="Logic\KoszykAkcje.cs" />
     <Compile Include="Logic\PayPalFunctions.cs.cs" />
+    <Compile Include="Logic\RoleActions.cs" />
     <Compile Include="Models\ElementKoszyka.cs" />
     <Compile Include="Models\Egzemplarz.cs" />
     <Compile Include="Models\EgzemplarzContext.cs" />

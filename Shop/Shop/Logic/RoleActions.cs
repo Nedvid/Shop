@@ -38,7 +38,7 @@ namespace Shop.Logic
             var userMgr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var appUser = new ApplicationUser
             {
-                UserName = "Admin",
+                UserName = "admin@shop.com",
                 Email = "admin@shop.com"
             };
             IdUserResult = userMgr.Create(appUser, "Pa$$word1");
