@@ -19,8 +19,10 @@ namespace Shop.Checkout
 
             if (Session["payment_amt"] != null)
             {
-                string amt = Session["payment_amt"].ToString();
-
+                //string amt = Session["payment_amt"].ToString();
+                string tmp = Math.Round(System.Convert.ToDecimal(Session["payment_amt"]), 2).ToString();
+                tmp = tmp.Replace(',', '.');
+                string amt = tmp;
                 bool ret = payPalCaller.ShortcutExpressCheckout(amt, ref token, ref retMsg);
                 if (ret)
                 {

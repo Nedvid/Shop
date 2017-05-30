@@ -79,9 +79,9 @@ public class NVPAPICaller
             for (int i = 0; i < myOrderList.Count; i++)
             {
                 encoder["L_PAYMENTREQUEST_0_NAME" + i] = myOrderList[i].Produkt.nazwa_produkt.ToString();
-               // string tmp = Math.Round(myOrderList[i].Produkt.cena, 2).ToString();
-               // encoder["L_PAYMENTREQUEST_0_AMT" + i] = Math.Round(myOrderList[i].Produkt.cena, 2).ToString();
-                encoder["L_PAYMENTREQUEST_0_AMT" + i] = "22.50";
+                string tmp = Math.Round(myOrderList[i].Produkt.cena, 2).ToString();
+                tmp=tmp.Replace(',', '.');
+                encoder["L_PAYMENTREQUEST_0_AMT" + i] = tmp;
                 encoder["L_PAYMENTREQUEST_0_QTY" + i] = myOrderList[i].ilosc.ToString();
             }
         }
@@ -154,7 +154,7 @@ public class NVPAPICaller
         encoder["TOKEN"] = token;
         encoder["PAYERID"] = PayerID;
         encoder["PAYMENTREQUEST_0_AMT"] = finalPaymentAmount;
-        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "USD";
+        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "PLN";
         encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
 
         string pStrrequestforNvp = encoder.Encode();

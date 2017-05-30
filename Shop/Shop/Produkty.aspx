@@ -4,9 +4,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <section>
 
-
-
-
         <div id="content">
             <div class="container">
 
@@ -74,31 +71,46 @@
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox">
-                                            <span class="colour white"></span>> 50zł
+                                            <input type="checkbox" class="CheckCeny" value="50">
+                                            > 50zł 
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox">
-                                            <span class="colour blue"></span>> 100zł
+                                            <input type="checkbox" class="CheckCeny" value="100">
+                                            > 100zł 
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox">
-                                            <span class="colour green"></span>> 150zł 
+                                            <input type="checkbox" class="CheckCeny" value="150">
+                                            > 150zł 
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox">
-                                            <span class="colour yellow"></span>> 200zł 
+                                            <input type="checkbox" class="CheckCeny" value="200">
+                                            > 200zł 
                                         </label>
                                     </div>
                                 </div>
-                                <button class="btn btn-success btn-sm btn-template-main"><i class="fa fa-check" aria-hidden="true" style="margin-right: 5px;"></i>Zastosuj</button>
+                                <button class="btn btn-success btn-sm btn-template-main" onclick="price()"><i class="fa fa-check" aria-hidden="true" style="margin-right: 5px;"></i>Zastosuj</button>
+                                <script>
+                                    function price() {
+                                        var elements = document.getElementsByClassName('CheckCeny');
+                                        var tmp = "";
 
+                                        for (var i = 0; i < elements.length; i++) {
+                                            if(elements[i].checked){
+                                                tmp = tmp + elements[i].value;
+                                            }
+                                        }
+
+                                        window.open("/Produkty.aspx?price=" + tmp, "_self");
+
+                                    }
+                                    
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -113,7 +125,7 @@
                                     <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
                                     <input type="text" class="form-control">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-success" type="button"><i class="fa fa-search" aria-hidden="true" style="margin-right: 5px;" ></i>Szukaj</button>
+                                        <button class="btn btn-success" type="button"><i class="fa fa-search" aria-hidden="true" style="margin-right: 5px;"></i>Szukaj</button>
                                     </span>
                                 </div>
                             </div>

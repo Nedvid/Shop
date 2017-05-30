@@ -16,33 +16,19 @@ namespace Shop
 
         }
 
-        public IQueryable<Produkt> GetProdukty([QueryString("id")] int? categoryId)
+        public IQueryable<Produkt> GetProdukty([QueryString("id")] int? categoryId, [QueryString("price")] int? price)
         {
             var _db = new Shop.Models.EgzemplarzContext();
             IQueryable<Produkt> query = _db.Produkty;
+            query = query.Where(p => p.Ilosc > 0);
             if (categoryId.HasValue && categoryId > 0)
             {
                 query = query.Where(p => p.id_Kategoria == categoryId);
             }
-            return query;
-        }
-
-        public IQueryable<Produkt> GetProdukty2([QueryString("id")] int? platformaId)
-        {
-            var _db = new Shop.Models.EgzemplarzContext();
-            IQueryable<Produkt> query = _db.Produkty;
-            if (platformaId.HasValue && platformaId> 0)
+            if(price.HasValue)
             {
-                query = query.Where(p => p.id_Platforma == platformaId);
+                query = query.Where(p => p.cena < price);
             }
-            return query;
-        }
-
-        public IQueryable<Produkt> GetAll()
-        {
-            var _db = new Shop.Models.EgzemplarzContext();
-            IQueryable<Produkt> query = _db.Produkty;
-            query = query.Where(p => p.Ilosc>0);
             return query;
         }
 

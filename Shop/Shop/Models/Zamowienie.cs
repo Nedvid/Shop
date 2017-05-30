@@ -2,12 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shop.Models
 {
     public class Zamowienie
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_zamowienie { get; set; }
 
         public System.DateTime data_zamowienie { get; set; }

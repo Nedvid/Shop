@@ -32,9 +32,12 @@ namespace Shop.Checkout
                     myOrder.data_zamowienie = Convert.ToDateTime(decoder["TIMESTAMP"].ToString());
                     myOrder.Login = User.Identity.Name;
                     myOrder.Email = decoder["EMAIL"].ToString();
-                    myOrder.Suma = Convert.ToDecimal(decoder["AMT"].ToString());
+                    string tmp = decoder["AMT"].ToString();
+                    tmp = tmp.Replace('.', ',');
+                    myOrder.Suma = Convert.ToDecimal(tmp);
 
                     // Verify total payment amount as set on CheckoutStart.aspx.
+                    /*
                     try
                     {
                         decimal paymentAmountOnCheckout = Convert.ToDecimal(Session["payment_amt"].ToString());
@@ -48,6 +51,7 @@ namespace Shop.Checkout
                     {
                         Response.Redirect("CheckoutError.aspx?" + "Desc=Amount%20total%20mismatch.");
                     }
+                    */
 
                     // Get DB context.
                     EgzemplarzContext _db = new EgzemplarzContext();
@@ -66,7 +70,7 @@ namespace Shop.Checkout
                         {
                             // Create a new OrderDetail object.
                             var myOrderDetail = new SzczegolyZamowienie();
-                            myOrderDetail.id_szczegoly_zamowienie = myOrder.id_zamowienie;
+                            myOrderDetail.id_zamowienie = myOrder.id_zamowienie;
                             myOrderDetail.Login = User.Identity.Name;
                             myOrderDetail.id_produkt = myOrderList[i].id_produkt;
                             myOrderDetail.id_egzemplacz = myOrderList[i].id_egzemplarz;
@@ -82,14 +86,14 @@ namespace Shop.Checkout
                         Session["currentOrderId"] = myOrder.id_zamowienie;
 
                         // Display Order information.
-                        List<Zamowienie> orderList = new List<Zamowienie>();
-                        orderList.Add(myOrder);
-                        ShipInfo.DataSource = orderList;
-                        ShipInfo.DataBind();
+                        //List<Zamowienie> orderList = new List<Zamowienie>();
+                        //orderList.Add(myOrder);
+                        //ShipInfo.DataSource = orderList;
+                        //ShipInfo.DataBind();
 
                         // Display OrderDetails.
-                        OrderItemList.DataSource = myOrderList;
-                        OrderItemList.DataBind();
+                        //OrderItemList.DataSource = myOrderList;
+                        //OrderItemList.DataBind();
                     }
                 }
                 else

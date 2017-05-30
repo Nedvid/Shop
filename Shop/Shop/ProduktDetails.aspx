@@ -56,7 +56,7 @@
                     <div class="campaign__offer-buybox">
                         <a href="/DodajDoKoszyka.aspx?id_produkt=<%#:Item.id_produkt %>" style="text-decoration: none;">
                             <span class="campaign__offer-buybox--button js-add-to-cart">
-                                 <span><i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right: 5px;"></i> KUP TERAZ</span>
+                                <span><i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right: 5px;"></i>KUP TERAZ</span>
                             </span>
                         </a>
                     </div>
