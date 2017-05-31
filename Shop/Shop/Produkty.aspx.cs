@@ -16,7 +16,7 @@ namespace Shop
 
         }
 
-        public IQueryable<Produkt> GetProdukty([QueryString("id")] int? categoryId, [QueryString("price")] int? price)
+        public IQueryable<Produkt> GetProdukty([QueryString("id")] int? categoryId, [QueryString("idp")] int? platformId,  [QueryString("price")] int? price, [QueryString("name")] string name)
         {
             var _db = new Shop.Models.EgzemplarzContext();
             IQueryable<Produkt> query = _db.Produkty;
@@ -25,9 +25,17 @@ namespace Shop
             {
                 query = query.Where(p => p.id_Kategoria == categoryId);
             }
-            if(price.HasValue)
+            if (platformId.HasValue && platformId> 0)
+            {
+                query = query.Where(p => p.id_Platforma == platformId);
+            }
+            if (price.HasValue)
             {
                 query = query.Where(p => p.cena < price);
+            }
+            if (name != null)
+            {
+                query = query.Where(p => p.nazwa_produkt == name);
             }
             return query;
         }
@@ -44,6 +52,24 @@ namespace Shop
             var _db = new Shop.Models.EgzemplarzContext();
             IQueryable<Platforma> query = _db.Platformy;
             return query;
+        }
+
+        public string GetNameKategoria(int? id)
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            var item = (from c in _db.Kategorie where c.id_kategoria== id select c).FirstOrDefault();
+
+
+            return item.nazwa_kategoria.ToString();
+        }
+
+        public string GetNamePlatforma(int? id)
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            var item = (from c in _db.Platformy where c.id_platforma == id select c).FirstOrDefault();
+
+
+            return item.nazwa_platforma.ToString();
         }
     }
 }
