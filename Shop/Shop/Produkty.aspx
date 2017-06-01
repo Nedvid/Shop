@@ -121,7 +121,6 @@
                                 <li class="active-category">
                                     <a href="/Produkty.aspx?price=250">> 250zł <span class="badge pull-right"></span></a>
                                 </li>
-
                             </ul>
 
                         </div>
@@ -176,11 +175,11 @@
                                             </h4>
                                             -->
                                         <p>
-                                            <span><i class="fa fa-gamepad" aria-hidden="true"></i><%#GetNameKategoria(Item.id_Kategoria)%> 
+                                            <span><i class="fa fa-gamepad" aria-hidden="true"></i> <%#GetNameKategoria(Item.id_Kategoria)%> 
                                             </span>
                                         </p>
                                         <p>
-                                            <span><i class="fa fa-desktop" aria-hidden="true"></i><%#GetNamePlatforma(Item.id_Platforma)%> 
+                                            <span><i class="fa fa-desktop" aria-hidden="true"></i> <%#GetNamePlatforma(Item.id_Platforma)%> 
                                             </span>
                                         </p>
                                     </div>

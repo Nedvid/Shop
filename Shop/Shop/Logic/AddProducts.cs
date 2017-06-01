@@ -26,5 +26,27 @@ namespace Shop.Logic
             // Success.
             return true;
         }
+
+        public bool AddEgz(string klucz, int? id_prd)
+        {
+            var myEgz = new Egzemplarz();
+            myEgz.klucz_egzemplarz = klucz;
+            myEgz.id_produkt = id_prd;
+            myEgz.data_zakup = DateTime.Now;
+            myEgz.czy_sprzedano = false;
+
+            using (EgzemplarzContext _db = new EgzemplarzContext())
+            {
+                //update ilosc
+                var myPrd = _db.Produkty.First(p => p.id_produkt == id_prd);
+                myPrd.Ilosc++;
+
+                // Add product to DB.
+                _db.Egzemplarze.Add(myEgz);
+                _db.SaveChanges();
+            }
+            // Success.
+            return true;
+        }
     }
 }

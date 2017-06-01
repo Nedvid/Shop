@@ -67,9 +67,18 @@ namespace Shop
         {
             var _db = new Shop.Models.EgzemplarzContext();
             var item = (from c in _db.Platformy where c.id_platforma == id select c).FirstOrDefault();
+            if (item !=null)
+            {
+                return item.nazwa_platforma.ToString();
+            }
+            else
+            {
+                return "Brak Platformy";
+            }
+           
 
 
-            return item.nazwa_platforma.ToString();
+            
         }
     }
 }

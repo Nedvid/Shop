@@ -11,6 +11,8 @@ namespace Shop.Checkout
 {
     public partial class CheckoutReview : System.Web.UI.Page
     {
+        EgzemplarzContext _db = new EgzemplarzContext();
+
         protected void Page_Load(object sender, EventArgs e) 
         {
             if (!IsPostBack)
@@ -36,25 +38,8 @@ namespace Shop.Checkout
                     tmp = tmp.Replace('.', ',');
                     myOrder.Suma = Convert.ToDecimal(tmp);
 
-                    // Verify total payment amount as set on CheckoutStart.aspx.
-                    /*
-                    try
-                    {
-                        decimal paymentAmountOnCheckout = Convert.ToDecimal(Session["payment_amt"].ToString());
-                        decimal paymentAmoutFromPayPal = Convert.ToDecimal(decoder["AMT"].ToString());
-                        if (paymentAmountOnCheckout != paymentAmoutFromPayPal)
-                        {
-                            Response.Redirect("CheckoutError.aspx?" + "Desc=Amount%20total%20mismatch.");
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        Response.Redirect("CheckoutError.aspx?" + "Desc=Amount%20total%20mismatch.");
-                    }
-                    */
-
                     // Get DB context.
-                    EgzemplarzContext _db = new EgzemplarzContext();
+                    
 
                     // Add order to DB.
                     _db.Zamowienia.Add(myOrder);
@@ -73,8 +58,8 @@ namespace Shop.Checkout
                             myOrderDetail.id_zamowienie = myOrder.id_zamowienie;
                             myOrderDetail.Login = User.Identity.Name;
                             myOrderDetail.id_produkt = myOrderList[i].id_produkt;
-                            myOrderDetail.id_egzemplacz = myOrderList[i].id_egzemplarz;
-                            myOrderDetail.ilosc = myOrderList[i].ilosc;
+                            myOrderDetail.id_egzemplarz = WolnyEgzemplarz(myOrderList[i].id_produkt);
+                            myOrderDetail.klucz_egzemplarz = GetKlucz(myOrderDetail.id_egzemplarz);
                             myOrderDetail.cena = myOrderList[i].Produkt.cena;
 
                             // Add OrderDetail to DB.
@@ -82,8 +67,14 @@ namespace Shop.Checkout
                             _db.SaveChanges();
                         }
 
+                        // Clear order id.
+                        Session["currentOrderId"] = string.Empty;
+
                         // Set OrderId.
                         Session["currentOrderId"] = myOrder.id_zamowienie;
+
+                        // Clear shopping cart.
+                        usersShoppingCart.EmptyCart();
 
                         // Display Order information.
                         //List<Zamowienie> orderList = new List<Zamowienie>();
@@ -102,11 +93,38 @@ namespace Shop.Checkout
                 }
             }
         }
+ 
+        protected int WolnyEgzemplarz(int? id_prd)
+        {
+            var Egz = _db.Egzemplarze.First(
+                c => c.id_produkt == id_prd
+                && c.czy_sprzedano == false);
+
+            Egz.data_sprzedaz = DateTime.Now;
+            Egz.czy_sprzedano = true;
+
+            var Prd = _db.Produkty.First(
+                c => c.id_produkt == id_prd);
+
+            Prd.Ilosc -= 1;
+
+            _db.SaveChanges();
+
+            return Egz.id_egzemplarz;
+        }
+
+        protected string GetKlucz(int? id_prd)
+        {
+            var Egz = _db.Egzemplarze.First(
+                 c => c.id_produkt == id_prd);
+
+            return Egz.klucz_egzemplarz;
+        }
+
 
         protected void CheckoutConfirm_Click(object sender, EventArgs e)
         {
-            Session["userCheckoutCompleted"] = "true";
-            Response.Redirect("~/Checkout/CheckoutComplete.aspx");
+            Response.Redirect("~/Produkty.aspx");
         }
     }
 }

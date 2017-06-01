@@ -3,6 +3,31 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Panel Administratora</h1>
     <hr />
+     <h4>Dodaj Egzmeplarz:</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <asp:Label CssClass="col-md-2 control-label" ID="LabelAddName" runat="server">Klucz:</asp:Label>
+                    <div class="col-md-10">
+                        <asp:TextBox CssClass="form-control" ID="AddKlucz" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator CssClass="text-danger" ID="RequiredFieldValidator1" runat="server" Text="* Klucz wymagany." ControlToValidate="AddKlucz" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <p></p>
+                        <p></p>
+                        <asp:Button CssClass="btn btn-success" ID="AddProductButton" runat="server" Text="Dodaj Egzemplarz" OnClick="AddEgzemplarzButton_Click" CausesValidation="true" />
+                        <asp:Label ID="LabelAddStatus" runat="server" Text=""></asp:Label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+
+
     <h4>Produkt: </h4>
         <table class="table table-striped table-hover ">
             <thead>

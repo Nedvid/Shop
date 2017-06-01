@@ -4,6 +4,11 @@ using System.Linq;
 using System.Web;
 using Shop.Models;
 
+
+/*to do:
+- w updacie sprawdzać ilosc
+- jak liczony jest koszyk
+*/
 namespace Shop.Logic
 {
     public class ShoppingCartActions : IDisposable
@@ -17,15 +22,9 @@ namespace Shop.Logic
             // Retrieve the product from the database.           
             ShoppingCartId = GetCartId();
 
-            //Znalezienie wolnego egzemplarza
-            var Egz = _db.Egzemplarze.First(
-                c => c.id_produkt == id_prd
-                && c.czy_sprzedano == false);
-
             var cartItem = _db.ElementyKoszyka.SingleOrDefault(
                 c => c.id_koszyk == ShoppingCartId
-                && c.id_produkt == id_prd
-                && c.id_egzemplarz == Egz.id_egzemplarz);
+                && c.id_produkt == id_prd);
 
             if (cartItem == null)
             {
@@ -34,11 +33,9 @@ namespace Shop.Logic
                 {
                     id_item = Guid.NewGuid().ToString(),
                     id_produkt = id_prd,
-                    id_egzemplarz = Egz.id_egzemplarz,
                     id_koszyk = ShoppingCartId,
                     Produkt = _db.Produkty.SingleOrDefault(
                     p => p.id_produkt == id_prd),
-                    Egzemplarz = Egz,
                     ilosc = 1,
                     data_utworzenia = DateTime.Now
                 };

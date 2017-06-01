@@ -16,12 +16,12 @@ namespace Shop.Admin
             string productAction = Request.QueryString["ProductAction"];
             if (productAction == "add")
             {
-                LabelAddStatus.Text = "Product added!";
+                LabelAddStatus.Text = "Produkt Dodany";
             }
 
             if (productAction == "remove")
             {
-                LabelRemoveStatus.Text = "Product removed!";
+                LabelRemoveStatus.Text = "Product usunięty!";
             }
         }
 

@@ -15,11 +15,9 @@ namespace Shop.Models
 
         public int id_produkt { get; set; }
 
-        public int id_egzemplacz { get; set; }
+        public int id_egzemplarz { get; set; }
 
         public string klucz_egzemplarz { get; set; }
-
-        public int ilosc { get; set; }
 
         public double? cena { get; set; }
 

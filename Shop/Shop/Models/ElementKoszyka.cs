@@ -22,10 +22,5 @@ namespace Shop.Models
         public int id_produkt { get; set; }
 
         public virtual Produkt Produkt { get; set; }
-
-        public int id_egzemplarz { get; set; }
-
-        public virtual Egzemplarz Egzemplarz { get; set; }
-
     }
 }
