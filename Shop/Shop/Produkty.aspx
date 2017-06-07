@@ -17,13 +17,13 @@
                                         </span>
                                     </h3>
                                     <p style="word-spacing: 5px;">
-                                        <span><i class="fa fa-gamepad" aria-hidden="true"></i> Akcja
+                                        <span><i class="fa fa-gamepad" aria-hidden="true"></i>Akcja
                                         </span>
-                                         <span><i class="fa fa-desktop" aria-hidden="true"></i> Ubisoft
+                                        <span><i class="fa fa-desktop" aria-hidden="true"></i>Ubisoft
                                         </span>
                                     </p>
                                 </div>
-                                <div class="campaign__offer-pricebox"  style="margin-top: 22px; margin-left: 550px;">
+                                <div class="campaign__offer-pricebox" style="margin-top: 22px; margin-left: 470px;">
                                     <div class="campaign__offer-pricetop">
                                         <!-- Cena przekreślona i wielkość zniżki: START -->
                                         <div class="campaign__offer-official-price">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="campaign__offer-buybox"  style="margin-top: 30px;">
+                                <div class="campaign__offer-buybox" style="margin-top: 30px;">
                                     <span class="campaign__offer-buybox--button js-add-to-cart">
                                         <span><i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right: 5px;"></i>Kup Teraz</span>
                                     </span>
@@ -207,10 +207,13 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="campaign__offer-buybox">
                                         <a href="/DodajDoKoszyka.aspx?id_produkt=<%#:Item.id_produkt %>" style="text-decoration: none;">
                                             <span class="campaign__offer-buybox--button js-add-to-cart">
-                                                <span><i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right: 5px;"></i>Kup Teraz</span>
+                                                <span><i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right: 5px;"></i>
+                                                    Kup Teraz
+                                                </span>
                                             </span>
                                         </a>
                                     </div>
@@ -223,7 +226,7 @@
 
             </div>
         </div>
-        </div>
+
 
 
     </section>

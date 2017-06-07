@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Shop.Models;
 
 namespace Shop
 {
@@ -14,20 +15,21 @@ namespace Shop
 
         }
 
-        public IQueryable GetSzczegoly()
+        public IQueryable GetSzczegoly(int id_zam)
         {
             var _db = new Shop.Models.EgzemplarzContext();
-            IQueryable query = _db.SzczegolyZamowienia.Where(p => p.Login == User.Identity.Name);
+            
+            IQueryable <SzczegolyZamowienie> query = _db.SzczegolyZamowienia.Where(p => p.Login == User.Identity.Name);
+            query = query.Where(p => p.id_zamowienie == id_zam);
+
+            return query;
+        }
+        public IQueryable GetZamowienia()
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            IQueryable query = _db.Zamowienia.Where(p => p.Login == User.Identity.Name);
             return query;
         }
 
-        public string GetNameProdukt(int? id)
-        {
-            var _db = new Shop.Models.EgzemplarzContext();
-            var item = (from c in _db.Produkty where c.id_produkt == id select c).FirstOrDefault();
-
-
-            return item.nazwa_produkt.ToString();
-        }
     }
 }

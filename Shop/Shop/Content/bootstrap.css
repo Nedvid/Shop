@@ -7039,5 +7039,141 @@ li.active-category a:hover{
     text-decoration: none;
 }
 
+.button-koszyk{
+    width: 150px;
+    float: left;
+}
+
+.welcome {
+    position: absolute;
+    z-index: 1;
+    color: white;
+}
+
+
+.slideshow,
+.slideshow:after {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    list-style: none;
+    background-color: black;
+
+}
+
+.slideshow li span {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: -17px;
+	left: 0px;
+	color: transparent;
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: none;
+	opacity: 0;
+	z-index: 0;
+	-webkit-backface-visibility: hidden;
+	-webkit-animation: imageAnimation 36s linear infinite 0s;
+	-moz-animation: imageAnimation 36s linear infinite 0s;
+	-o-animation: imageAnimation 36s linear infinite 0s;
+	-ms-animation: imageAnimation 36s linear infinite 0s;
+	animation: imageAnimation 36s linear infinite 0s;
+}
+.slideshow li:nth-child(1) span { 
+    background-image: url(https://wallpaperscraft.com/image/batman_arkham_origins_deathstroke_warner_bros_games_montreal_dc_comics_arkham_origins_video_games_95421_1920x1080.jpg) 
+}
+.slideshow li:nth-child(2) span { 
+    background-image: url(http://eskipaper.com/images/game-wallpapers-1.jpg);
+    -webkit-animation-delay: 6s;
+    -moz-animation-delay: 6s;
+    -o-animation-delay: 6s;
+    -ms-animation-delay: 6s;
+    animation-delay: 6s; 
+}
+.slideshow li:nth-child(3) span { 
+    background-image: url(http://wallpapercave.com/wp/fdfbmXH.jpg);
+    -webkit-animation-delay: 12s;
+    -moz-animation-delay: 12s;
+    -o-animation-delay: 12s;
+    -ms-animation-delay: 12s;
+    animation-delay: 12s; 
+}
+.slideshow li:nth-child(4) span { 
+    background-image: url(https://wallpaperscraft.com/image/dark_souls_ii_dark_souls_warrior_knight_from_software_namco_bandai_games_98197_1920x1080.jpg);
+    -webkit-animation-delay: 18s;
+    -moz-animation-delay: 18s;
+    -o-animation-delay: 18s;
+    -ms-animation-delay: 18s;
+    animation-delay: 18s; 
+}
+.slideshow li:nth-child(5) span { 
+    background-image: url(https://hdwallsource.com/img/2014/12/video-game-wallpapers-8244-8577-hd-wallpapers.jpg);
+    -webkit-animation-delay: 24s;
+    -moz-animation-delay: 24s;
+    -o-animation-delay: 24s;
+    -ms-animation-delay: 24s;
+    animation-delay: 24s; 
+}
+.slideshow li:nth-child(6) span { 
+    background-image: url(http://eskipaper.com/images/game-wallpapers-32.jpg);
+    -webkit-animation-delay: 30s;
+    -moz-animation-delay: 30s;
+    -o-animation-delay: 30s;
+    -ms-animation-delay: 30s;
+    animation-delay: 30s; 
+}
+
+/* Animation for the slideshow images */
+@-webkit-keyframes imageAnimation { 
+    0% { opacity: 0;
+    -webkit-animation-timing-function: ease-in; }
+    8% { opacity: 1;
+         -webkit-animation-timing-function: ease-out; }
+    17% { opacity: 1 }
+    25% { opacity: 0 }
+    100% { opacity: 0 }
+}
+@-moz-keyframes imageAnimation { 
+    0% { opacity: 0;
+    -moz-animation-timing-function: ease-in; }
+    8% { opacity: 1;
+         -moz-animation-timing-function: ease-out; }
+    17% { opacity: 1 }
+    25% { opacity: 0 }
+    100% { opacity: 0 }
+}
+@-o-keyframes imageAnimation { 
+    0% { opacity: 0;
+    -o-animation-timing-function: ease-in; }
+    8% { opacity: 1;
+         -o-animation-timing-function: ease-out; }
+    17% { opacity: 1 }
+    25% { opacity: 0 }
+    100% { opacity: 0 }
+}
+@-ms-keyframes imageAnimation { 
+    0% { opacity: 0;
+    -ms-animation-timing-function: ease-in; }
+    8% { opacity: 1;
+         -ms-animation-timing-function: ease-out; }
+    17% { opacity: 1 }
+    25% { opacity: 0 }
+    100% { opacity: 0 }
+}
+@keyframes imageAnimation { 
+    0% { opacity: 0;
+    animation-timing-function: ease-in; }
+    8% { opacity: 1;
+         animation-timing-function: ease-out; }
+    17% { opacity: 1 }
+    25% { opacity: 0 }
+    100% { opacity: 0 }
+
+
+
 
 

@@ -11,7 +11,7 @@ namespace Shop.Checkout
 {
     public partial class CheckoutReview : System.Web.UI.Page
     {
-        EgzemplarzContext _db = new EgzemplarzContext();
+        public static EgzemplarzContext _db = new EgzemplarzContext();
 
         protected void Page_Load(object sender, EventArgs e) 
         {
@@ -53,18 +53,22 @@ namespace Shop.Checkout
                         // Add OrderDetail information to the DB for each product purchased.
                         for (int i = 0; i < myOrderList.Count; i++)
                         {
-                            // Create a new OrderDetail object.
-                            var myOrderDetail = new SzczegolyZamowienie();
-                            myOrderDetail.id_zamowienie = myOrder.id_zamowienie;
-                            myOrderDetail.Login = User.Identity.Name;
-                            myOrderDetail.id_produkt = myOrderList[i].id_produkt;
-                            myOrderDetail.id_egzemplarz = WolnyEgzemplarz(myOrderList[i].id_produkt);
-                            myOrderDetail.klucz_egzemplarz = GetKlucz(myOrderDetail.id_egzemplarz);
-                            myOrderDetail.cena = myOrderList[i].Produkt.cena;
+                            for (int j = 0; j< myOrderList[i].ilosc; j++)
+                            {
+                                // Create a new OrderDetail object.
+                                var myOrderDetail = new SzczegolyZamowienie();
+                                myOrderDetail.id_zamowienie = myOrder.id_zamowienie;
+                                myOrderDetail.Login = User.Identity.Name;
+                                myOrderDetail.id_produkt = myOrderList[i].id_produkt;
+                                myOrderDetail.id_egzemplarz = WolnyEgzemplarz(myOrderList[i].id_produkt);
+                                myOrderDetail.klucz_egzemplarz = GetKlucz(myOrderDetail.id_egzemplarz);
+                                myOrderDetail.produkt = myOrderList[i].Produkt.nazwa_produkt;
+                                myOrderDetail.cena = myOrderList[i].Produkt.cena;
 
-                            // Add OrderDetail to DB.
-                            _db.SzczegolyZamowienia.Add(myOrderDetail);
-                            _db.SaveChanges();
+                                // Add OrderDetail to DB.
+                                _db.SzczegolyZamowienia.Add(myOrderDetail);
+                                _db.SaveChanges();
+                            }
                         }
 
                         // Clear order id.
@@ -96,16 +100,12 @@ namespace Shop.Checkout
  
         protected int WolnyEgzemplarz(int? id_prd)
         {
-            var Egz = _db.Egzemplarze.First(
-                c => c.id_produkt == id_prd
-                && c.czy_sprzedano == false);
+            var Egz = (from c in _db.Egzemplarze where c.id_produkt == id_prd && c.czy_sprzedano==false  select c).FirstOrDefault();
 
             Egz.data_sprzedaz = DateTime.Now;
             Egz.czy_sprzedano = true;
 
-            var Prd = _db.Produkty.First(
-                c => c.id_produkt == id_prd);
-
+            var Prd = (from c in _db.Produkty where c.id_produkt == id_prd select c).FirstOrDefault();
             Prd.Ilosc -= 1;
 
             _db.SaveChanges();
@@ -113,14 +113,12 @@ namespace Shop.Checkout
             return Egz.id_egzemplarz;
         }
 
-        protected string GetKlucz(int? id_prd)
+        protected string GetKlucz(int? id_egz)
         {
-            var Egz = _db.Egzemplarze.First(
-                 c => c.id_produkt == id_prd);
+            var Egz = (from c in _db.Egzemplarze where c.id_egzemplarz == id_egz select c).FirstOrDefault();
 
             return Egz.klucz_egzemplarz;
         }
-
 
         protected void CheckoutConfirm_Click(object sender, EventArgs e)
         {

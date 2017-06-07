@@ -8,7 +8,7 @@ namespace Shop.Logic
 {
     public class AddProducts
     {
-        public bool AddProduct(string ProductName, string ProductDesc, string ProductPrice, string ProductCategory, string ProductImagePath)
+        public bool AddProduct(string ProductName, string ProductDesc, string ProductPrice, string ProductCategory, string ProductPlatform, string VAT, string ProductImagePath)
         {
             var myProduct = new Produkt();
             myProduct.nazwa_produkt = ProductName;
@@ -16,6 +16,8 @@ namespace Shop.Logic
             myProduct.cena = Convert.ToDouble(ProductPrice);
             myProduct.foto = ProductImagePath;
             myProduct.id_Kategoria= Convert.ToInt32(ProductCategory);
+            myProduct.id_Platforma = Convert.ToInt32(ProductPlatform);
+            myProduct.id_VAT = Convert.ToInt32(VAT);
 
             using (EgzemplarzContext _db = new EgzemplarzContext())
             {

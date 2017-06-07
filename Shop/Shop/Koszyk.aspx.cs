@@ -63,7 +63,16 @@ namespace Shop
 
                     TextBox quantityTextBox = new TextBox();
                     quantityTextBox = (TextBox)CartList.Rows[i].FindControl("PurchaseQuantity");
-                    cartUpdates[i].PurchaseQuantity = Convert.ToInt16(quantityTextBox.Text.ToString());
+                    int ilosc = Convert.ToInt16(quantityTextBox.Text.ToString());
+
+                    if (CheckIlosc(ilosc, cartUpdates[i].ProductId))
+                    {
+                        cartUpdates[i].PurchaseQuantity = Convert.ToInt16(quantityTextBox.Text.ToString());
+                    }
+                    else
+                    {
+                        cartUpdates[i].PurchaseQuantity = Convert.ToInt16(max(cartUpdates[i].ProductId));
+                    }
                 }
                 usersShoppingCart.UpdateShoppingCartDatabase(cartId, cartUpdates);
                 CartList.DataBind();
@@ -98,6 +107,30 @@ namespace Shop
                 Session["payment_amt"] = usersShoppingCart.GetTotal();
             }
             Response.Redirect("Checkout/CheckoutStart.aspx");
+        }
+
+        protected Boolean CheckIlosc(int ilosc, int id_prd)
+        {
+            var _db = new EgzemplarzContext();
+            var item = (from c in _db.Produkty where c.id_produkt == id_prd select c).FirstOrDefault();
+
+            if (item.Ilosc >= ilosc)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        protected int? max (int id_prd)
+        {
+            var _db = new EgzemplarzContext();
+            var item = (from c in _db.Produkty where c.id_produkt == id_prd select c).FirstOrDefault();
+
+            return item.Ilosc;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Shop.Models
         [Display(Name = "Poprzednia Cena")]
         public double poprzednia_cena { get; set; }
 
-        [Display(Name = "Ilosc"),]
+        [Display(Name = "Ilosc")]
         public int? Ilosc { get; set; }
 
         public virtual ICollection<Egzemplarz> Egzemplarze { get; set; }

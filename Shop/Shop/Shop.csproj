@@ -202,6 +202,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Koszyk.aspx" />
     <Content Include="Orders.aspx" />
+    <Content Include="OrdersDetails.aspx" />
     <Content Include="ProduktDetails.aspx" />
     <Content Include="Produkty.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -469,6 +470,13 @@
     </Compile>
     <Compile Include="Orders.aspx.designer.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrdersDetails.aspx.cs">
+      <DependentUpon>OrdersDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdersDetails.aspx.designer.cs">
+      <DependentUpon>OrdersDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProduktDetails.aspx.cs">
       <DependentUpon>ProduktDetails.aspx</DependentUpon>

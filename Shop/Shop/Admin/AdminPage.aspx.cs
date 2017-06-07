@@ -16,12 +16,12 @@ namespace Shop.Admin
             string productAction = Request.QueryString["ProductAction"];
             if (productAction == "add")
             {
-                LabelAddStatus.Text = "Produkt Dodany";
+                LabelAddStatusSuccess.Text = "Produkt Dodany";
             }
 
             if (productAction == "remove")
             {
-                LabelRemoveStatus.Text = "Product usunięty!";
+                LabelAddStatusSuccess.Text = "Produkt Usunięty";
             }
         }
 
@@ -53,13 +53,13 @@ namespace Shop.Admin
                 }
                 catch (Exception ex)
                 {
-                    LabelAddStatus.Text = ex.Message;
+                    LabelAddStatusDanger.Text = ex.Message;
                 }
 
                 // Add product data to DB.
                 AddProducts products = new AddProducts();
                 bool addSuccess = products.AddProduct(AddProductName.Text, AddProductDescription.Text,
-                    AddProductPrice.Text, DropDownAddCategory.SelectedValue, ProductImage.FileName);
+                    AddProductPrice.Text, DropDownAddCategory.SelectedValue, DropDownAddPlatform.SelectedValue, DropDownAddVAT.SelectedValue, ProductImage.FileName);
                 if (addSuccess)
                 {
                     // Reload the page.
@@ -68,12 +68,12 @@ namespace Shop.Admin
                 }
                 else
                 {
-                    LabelAddStatus.Text = "Unable to add new product to database.";
+                    LabelAddStatusDanger.Text = "Nie można dodać produktu do bazy.";
                 }
             }
             else
             {
-                LabelAddStatus.Text = "Unable to accept file type.";
+                LabelAddStatusDanger.Text = "Niedopuszczalne rozszerzenie.";
             }
         }
 
@@ -84,6 +84,20 @@ namespace Shop.Admin
             return query;
         }
 
+        public IQueryable GetPlatformy()
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            IQueryable query = _db.Platformy;
+            return query;
+        }
+
+        public IQueryable GetVAT()
+        {
+            var _db = new Shop.Models.EgzemplarzContext();
+            IQueryable query = _db.VATy;
+            return query;
+        }
+
         public IQueryable GetProducts()
         {
             var _db = new Shop.Models.EgzemplarzContext();
@@ -91,22 +105,25 @@ namespace Shop.Admin
             return query;
         }
 
-        public IQueryable GetEgzemplarze(object sender, EventArgs e)
-        {
-            int productId = Convert.ToInt16(DropDownRemoveProduct.SelectedValue);
-            var _db = new Shop.Models.EgzemplarzContext();
-            IQueryable query = (from c in _db.Egzemplarze where c.id_produkt == productId select c).AsQueryable();
-            return query;
-        }
-
         protected void RemoveProductButton_Click(object sender, EventArgs e)
         {
             using (var _db = new Shop.Models.EgzemplarzContext())
             {
-                int productId = Convert.ToInt16(DropDownRemoveProduct.SelectedValue);
+                var button = (Button)sender;
+
+                int productId = Convert.ToInt16(button.CommandArgument);
                 var myItem = (from c in _db.Produkty where c.id_produkt == productId select c).FirstOrDefault();
-                if (myItem != null)
+
+                IQueryable<Egzemplarz> query = _db.Egzemplarze;
+                query = query.Where(p => p.id_produkt == productId);
+
+                if (myItem != null && query != null)
                 {
+                    foreach ( var item in query)
+                    {
+                        _db.Egzemplarze.Remove(item);
+                    }
+
                     _db.Produkty.Remove(myItem);
                     _db.SaveChanges();
 
@@ -116,7 +133,7 @@ namespace Shop.Admin
                 }
                 else
                 {
-                    LabelRemoveStatus.Text = "Unable to locate product.";
+                    LabelAddStatusDanger.Text = "Nie można usunąć produktu.";
                 }
             }
         }
